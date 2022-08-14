@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pikube-hermes
+  namespace: hip
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: pikube-hermes
+  template:
+    metadata:
+      labels:
+        application: pikube-hermes
+    spec:
+      serviceAccountName: hip-operator
+      containers:
+        - name: pikube-hermes
+          image: silvertoken/pikube-hermes:0.0.1
